@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <title>EC - LP3</title>
     <style>
         body {
@@ -43,7 +44,7 @@
 <body>
     <h1>Cards Pokemon:</h1>
     <p>Nome do pokemon:</p>
-    <input type="text">
+    <input type="text" id="filtro">
     <p><button onclick="callApi();">Call API</button></p>
     <table>
         <thead>
@@ -66,7 +67,7 @@
     var dataLancamento;
 
     function callApi() {
-        let URL = "https://api.pokemontcg.io/v2/cards/xy1-1";
+        let URL = "https://api.pokemontcg.io/v2/cards/";
 
         fetch(URL)
             .then(req => req.json())
@@ -75,31 +76,53 @@
     }
 
     function fillTable(tableData) {
+        debugger;
+        var pesquisa = $('#filtro').val();
         const tbodyTag = document.getElementById("tableData");
         tbodyTag.innerHTML = "";
-        for (var item in tableData) {
+        for (var item in tableData.data) {
+            if(pesquisa && pesquisa.length > 1){
 
-            let trTag = document.createElement("tr");
-            let tdTagName = document.createElement("td");
-            let tdTagTypes = document.createElement("td");
-            let tdTagImages = document.createElement("td");
-
-            tdTagName.innerHTML = tableData[item].name;
-            trTag.appendChild(tdTagName);
-
-            tdTagTypes.innerHTML = tableData[item].types;
-            trTag.appendChild(tdTagTypes);
-
-            tdTagImages.innerHTML = '<img src="' + tableData[item].images.small +  '" alt="Card Pokémon">';
-            trTag.appendChild(tdTagImages);
-
-            tbodyTag.appendChild(trTag);
-
+                if(tableData.data[item].name.includes(pesquisa)){
+                    let trTag = document.createElement("tr");
+                let tdTagName = document.createElement("td");
+                let tdTagTypes = document.createElement("td");
+                let tdTagImages = document.createElement("td");
+    
+                tdTagName.innerHTML = tableData.data[item].name;
+                trTag.appendChild(tdTagName);
+    
+                tdTagTypes.innerHTML = tableData.data[item].types;
+                trTag.appendChild(tdTagTypes);
+    
+                tdTagImages.innerHTML = '<img src="'+ tableData.data[item].images.small +'" alt="Card Pokémon">';
+                trTag.appendChild(tdTagImages);
+    
+                tbodyTag.appendChild(trTag);
+                }
+                else
+                    continue;
+            }
+            else{
+                let trTag = document.createElement("tr");
+                let tdTagName = document.createElement("td");
+                let tdTagTypes = document.createElement("td");
+                let tdTagImages = document.createElement("td");
+    
+                tdTagName.innerHTML = tableData.data[item].name;
+                trTag.appendChild(tdTagName);
+    
+                tdTagTypes.innerHTML = tableData.data[item].types;
+                trTag.appendChild(tdTagTypes);
+    
+                tdTagImages.innerHTML = '<img src="'+ tableData.data[item].images.small +'" alt="Card Pokémon">';
+                trTag.appendChild(tdTagImages);
+    
+                tbodyTag.appendChild(trTag);
+            }
         }
-
-        
     }
-    var myChart;
+    
 
 </script>
 
