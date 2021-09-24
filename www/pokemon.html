@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <title>EC - LP3</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+        }
+
+        td {
+            width: 500px;
+        }
+
+        tr:nth-child(n+1) {
+            background: #ff00004f;
+        }
+        /* tr{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+        th{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+        td{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        } */
+    </style>
+</head>
+
+<body>
+    <h1>Cards Pokemon:</h1>
+    <p>Nome do pokemon:</p>
+    <input type="text">
+    <p><button onclick="callApi();">Call API</button></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Card</th>
+            </tr>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+    </table>
+    <br>
+
+</body>
+
+</html>
+
+<script>
+    var dataLancamento;
+
+    function callApi() {
+        let URL = "https://api.pokemontcg.io/v2/cards/xy1-1";
+
+        fetch(URL)
+            .then(req => req.json())
+            .then(show => { console.log(show); fillTable(show); })
+
+    }
+
+    function fillTable(tableData) {
+        const tbodyTag = document.getElementById("tableData");
+        tbodyTag.innerHTML = "";
+        for (var item in tableData) {
+
+            let trTag = document.createElement("tr");
+            let tdTagName = document.createElement("td");
+            let tdTagTypes = document.createElement("td");
+            let tdTagImages = document.createElement("td");
+
+            tdTagName.innerHTML = tableData[item].name;
+            trTag.appendChild(tdTagName);
+
+            tdTagTypes.innerHTML = tableData[item].types;
+            trTag.appendChild(tdTagTypes);
+
+            tdTagImages.innerHTML = '<img src="' + tableData[item].images.small +  '" alt="Card Pokémon">';
+            trTag.appendChild(tdTagImages);
+
+            tbodyTag.appendChild(trTag);
+
+        }
+
+        
+    }
+    var myChart;
+
+</script>
+
+<!-- https://docs.pokemontcg.io/api-reference/cards/search-cards -->
