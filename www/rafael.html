@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+        <title>Pesquisa de Animes</title>
+        <style>
+            body {font-family: Verdana, sans-serif;}
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <h1 style="text-align: center;">ANIMES</h1>
+            <br>
+            <label for="pesquisa">Digite o nome de um anime:</label>
+            <input type="text" class="form-control" id="pesquisa">
+            <br>
+            <button class="btn btn-primary" onclick="callApi();">Pesquisar</button>
+
+        </div>
+        <br>
+
+        <div class="container">
+
+            <div class="row">
+                <table class="table table-hover">
+                    <tbody id="tabelaPesquisa"></tbody>
+                </table>
+            </div>            
+        </div>
+
+    </body>
+</html>
+
+<script>
+
+    function callApi() {
+        var pesquisa = $('#pesquisa').val();
+        //debugger;
+        if(!pesquisa || pesquisa.length < 3){
+            window.alert("Digite algo valido!");
+        }
+        else{
+            let URL = "https://api.jikan.moe/v3/search/anime?q="+ pesquisa;
+
+            fetch(URL)
+                .then(req => req.json())
+                .then(show => { console.log(show); montaPesquisa(show)})
+        }
+    }
+
+    function montaPesquisa(dados) {
+        
+        const tbodyTag = document.getElementById("tabelaPesquisa");
+        tbodyTag.innerHTML="";
+
+        for(var anime in dados.results) {
+
+            let trTag = document.createElement("tr");
+            let tdImage = document.createElement("td");
+            let tdInfo = document.createElement("td"); 
+
+            tdInfo.innerHTML = '<b>' + dados.results[anime].title + '</b>'+
+            '<br><br>Sinopse: ' + dados.results[anime].synopsis +
+            '<br><br>Tipo: ' + dados.results[anime].type +
+            '<br><br>Lançamento: ' + converteData(dados.results[anime].start_date) +
+            '<br><br>Link: <a href="'+ dados.results[anime].url +'" target="_blank">' + dados.results[anime].url  + '</a>';
+            trTag.appendChild(tdInfo);
+
+            tdImage.innerHTML = '<img src="' + dados.results[anime].image_url +  '" width="184">';
+            trTag.appendChild(tdImage);
+
+            tbodyTag.appendChild(trTag);
+        }
+    }
+
+    function converteData(data){
+        //debugger;
+        var dataSimples = data.split('T');
+        var datinha = dataSimples[0].split('-');
+        return datinha[2] + '/' + datinha[1] + '/' + datinha[0];
+    }
+
+</script>
