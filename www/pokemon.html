@@ -6,17 +6,15 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="initial-scale=1, width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="/logo.png">
+    <link rel="stylesheet" href="css/pokemon.css">
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/rafael.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <title>Pesquisa de Animes</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <title>Poke TCG</title>
 </head>
 
 <body>
@@ -24,22 +22,26 @@
         <img src="img/logo2.png" alt="Logo 2 Team Pokeball">
     </header>
     <div class="container">
-        <h1>Animes</h1>
-        <h4 for="pesquisa">Digite o nome de um anime:</h4>
+        <h1>Cartas do Pokemon TCG</h1>
         <div class="tb">
             <div class="t">
-                <input type="text" class="form-control" id="pesquisa">
+                <input type="text" placeholder="Nome do Pokemon" id="filtro">
             </div>
-            <button class="btn btn-primary pull-right" onclick="callApi();">Pesquisar</button>
+            <p><button onclick="callApi();">Pesquisar</button></p>
         </div>
     </div>
-    <br>
-    <div class="container">
-        <div class="row">
-            <table class="table table-hover">
-                <tbody id="tabelaPesquisa"></tbody>
-            </table>
-        </div>
+    <div class="table-pkmn">
+        <table>
+            <thead>
+                <tr>
+                    <th id="base" hidden>Nome</th>
+                    <th id="base" hidden>Tipo</th>
+                    <th id="base" hidden>Card</th>
+                </tr>
+            </thead>
+            <tbody id="tableData">
+            </tbody>
+        </table>
     </div>
     <footer>
         <div class="items-menu">
@@ -73,4 +75,4 @@
 
 </html>
 
-<script src="js/rafael.js"></script>
+<script src="js/pokemon.js"></script>

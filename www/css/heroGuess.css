@@ -3,30 +3,8 @@
     margin-bottom: 30px;
 }
 
-.guess {
-	box-shadow:inset 0px 1px 0px 0px #9acc85;
-	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
-	background-color:#74ad5a;
-	border:1px solid #3b6e22;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:6px 12px;
-	text-decoration:none;
-    width: 200px;
-    height: 20px;
-    margin-bottom: 20px;
-}
-.guess:hover {
-	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-	background-color:#68a54b;
-}
-.guess:active {
-	position:relative;
-	top:1px;
+#total{
+    margin-right: 20px;
 }
 
 * {
@@ -36,11 +14,8 @@
 
 body {
     -webkit-touch-callout: none;
-    /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;
-    /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;
-    /* prevent copy paste, to allow, change 'none' to 'text' */
     font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
     font-size: 12px;
     margin: 0px;
@@ -52,10 +27,16 @@ body {
     text-align: center;
 }
 
+h1 {
+    font-size: 40px;
+}
+
 p {
     font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
     size: 12px;
     color: white;
+	font-size: medium;
+    text-align: center;
 }
 
 .reset {
@@ -82,6 +63,28 @@ p {
 	top:1px;
 }
 
-#total, #best, #streak {
-    margin-right: 20px;
+.guess {
+	box-shadow:inset 0px 1px 0px 0px #9acc85;
+	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+	background-color:#74ad5a;
+	border:1px solid #3b6e22;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+    width: 200px;
+    height: 20px;
+    margin-bottom: 20px;
+}
+.guess:hover {
+	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+	background-color:#68a54b;
+}
+.guess:active {
+	position:relative;
+	top:1px;
 }

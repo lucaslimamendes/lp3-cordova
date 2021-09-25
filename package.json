@@ -1,6 +1,6 @@
 {
   "name": "com.lp3.api.app",
-  "displayName": "lp3ApiApp",
+  "displayName": "APIs - FTT LPIII",
   "version": "1.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",

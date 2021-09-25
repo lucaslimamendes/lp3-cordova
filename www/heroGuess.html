@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="viewport" content="initial-scale=1, width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="/logo.png">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/heroGuess.css">
-    <script src="js/heroGuess.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <title>Dota2 Hero Guess</title>
 </head>
 
@@ -20,26 +23,18 @@
     </header>
     <div class="container">
         <h1>Adivinhe o nome do Herói</h1>
-        <figure>
-            <img alt="Hero's Image" id="heroImg">
-        </figure>
-        <div>
-            <div style="text-align: center;">
-                <a class="guess" id="opt1" onclick="checkAnswer('#opt1')">
-                </a><br>
-                <a class="guess" id="opt2" onclick="checkAnswer('#opt2')">
-                </a><br>
-                <a class="guess" id="opt3" onclick="checkAnswer('#opt3')">
-                </a><br>
-                <a class="guess" id="opt4" onclick="checkAnswer('#opt4')">
-                </a><br>
-            </div>
-            <br>
-            <button class="reset" onclick="beginRound()">Reiniciar</button>
-            <br>
-            <br>
-            <h4>Acertos seguidos: <a id="streak"></a> Recorde: <a id="best"></a> Total: <a id="total"></a></h4>
-        </div>
+        <img alt="" id="heroImg">
+        <a class="guess" id="opt1" onclick="checkAnswer('#opt1')"></a>
+        <br>
+        <a class="guess" id="opt2" onclick="checkAnswer('#opt2')"></a>
+        <br>
+        <a class="guess" id="opt3" onclick="checkAnswer('#opt3')"></a>
+        <br>
+        <a class="guess" id="opt4" onclick="checkAnswer('#opt4')"></a>
+        <br>
+        <a class="reset" onclick="beginRound()">Reiniciar</a>
+        <br>
+        <h4>Acertos seguidos:<a id="streak"></a></h4>
     </div>
     <footer>
         <div class="items-menu">
@@ -51,7 +46,7 @@
                 <img src="img/icons/anime-list.png" alt="">
                 <span>Anime</span>
             </a>
-            <a href="#">
+            <a href="pokemon.html">
                 <img src="img/icons/tcg.png" alt="">
                 <span>TCG</span>
             </a>
@@ -69,6 +64,9 @@
             </a>
         </div>
     </footer>
+    
 </body>
 
 </html>
+
+<script src="js/heroGuess.js"></script>
