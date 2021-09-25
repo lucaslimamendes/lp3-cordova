@@ -2,125 +2,73 @@
 <html>
 
 <head>
-    <script>
-
-        const urlDotaList = "https://pacific-sierra-10784.herokuapp.com/http://api.steampowered.com/IEconDOTA2_570/getHeroes/v1?key=0069303A2719A03FFD8B79E9F06546AD";
-        var heroesList = [];
-        const urlDotaImg = "https://cdn.dota2.com/apps/dota2/images/heroes/HERONAME_sb.png";
-        var headers = { "Origin": "*", "Access-Control-Allow-Origin": "*" }
-        window.streak = 0;
-        let total = window.localStorage.getItem("totalCorrects");
-        let best = window.localStorage.getItem("bestStreak");
-
-        fetch(urlDotaList, {
-            method: "GET",
-            mode: 'cors',
-            headers: headers
-        })
-            .then(resp => resp.json())
-            .then(result => {
-                for (let i = 0; i < result.result.heroes.length; i++) {
-                    heroesList.push(result.result.heroes[i].name.replace('npc_dota_hero_', ''));
-                }
-                beginRound();
-            })
-
-        function checkAnswer(id) {
-            var alt = document.querySelector(id).textContent;
-
-            if (window.resposta == alt) {
-                let number = Number(window.localStorage.getItem("totalCorrects"))
-
-                number++
-
-                window.localStorage.setItem("totalCorrects", number)
-
-                window.streak++
-
-                if (Number(window.localStorage.getItem("bestStreak")) < window.streak)
-                    window.localStorage.setItem("bestStreak", window.streak)
-
-            } else {
-                window.streak = 0;
-            }
-
-            beginRound()
-        }
-
-        function beginRound() {
-
-            var heroPool = [];
-
-            document.querySelector("#best").textContent = best;
-            document.querySelector("#total").textContent = total;
-            document.querySelector("#streak").textContent = window.streak;
-
-            while (heroPool.length != 4) {
-                var num = getRandomInt(0, 121);
-
-                var hero = { name: capitalizeFirstLetter(heroesList[num].replaceAll("_", " ")), image: urlDotaImg.replace("HERONAME", heroesList[num]) };
-
-                if (!heroPool.includes(hero))
-                    heroPool.push(hero);
-            }
-
-            var correct = getRandomInt(-1, 4);
-
-
-            document.querySelector("#heroImg").src = heroPool[correct].image;
-            document.querySelector("#opt" + (correct + 1)).textContent = heroPool[correct].name;
-
-            window.resposta = heroPool[correct].name;
-
-            heroPool.splice(correct, 1);
-
-            for (let i = 1; i < 5; i++) {
-                if (i == (correct + 1))
-                    continue
-
-                document.querySelector("#opt" + i).textContent = heroPool[heroPool.length - 1].name;
-                heroPool.pop();
-            }
-        }
-
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min)) + min;
-        }
-    </script>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/heroGuess.css">
+    <script src="js/heroGuess.js"></script>
     <title>Dota2 Hero Guess</title>
-
 </head>
 
 <body>
-    <div style="text-align:center;    width:40%;background-color: rgb(189, 186, 186);position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;">
-        <h1>Adivinhe o nome do Herói abaixo</h1>
-        <figure >
-            <img alt="Hero's Image" id="heroImg" style="width: 15%; height: 15%">
+    <header>
+        <img src="img/logo2.png" alt="Logo 2 Team Pokeball">
+    </header>
+    <div class="container">
+        <h1>Adivinhe o nome do Herói</h1>
+        <figure>
+            <img alt="Hero's Image" id="heroImg">
         </figure>
-        <h2>Acertos seguidos: <a id="streak"></a></h2>
-        <h4>Recorde de acertos: <a id="best"></a></h4>
-        <h4>Acertos no totais: <a id="total"></a></h4>
-            <div style="outline: #000000 solid 1px; background-color: rgba(0, 0, 0, 0.5); display:inline-table;">
-                <h4 style="color: white">ALTERNATIVAS :</h4>
-                <div style="text-align: center;">
-                    <button style=" font-style:oblique; width:200px; outline: #000000 solid 2px; text-align: center; margin: 10px;" onclick="checkAnswer('#opt1')"><a id="opt1"></a></button><br>
-                    <button style=" font-style:oblique; width:200px; outline: #000000 solid 2px; text-align: center; margin: 10px;" onclick="checkAnswer('#opt2')"><a id="opt2"></a></button><br>
-                    <button style=" font-style:oblique; width:200px; outline: #000000 solid 2px; text-align: center; margin: 10px;" onclick="checkAnswer('#opt3')"><a id="opt3"></a></button><br>
-                    <button style=" font-style:oblique; width:200px; outline: #000000 solid 2px; text-align: center; margin: 10px;" onclick="checkAnswer('#opt4')"><a id="opt4"></a></button>
-                </div>
-                <br>
-                <button style="font-style:oblique; width:200px;" onclick="beginRound()">Reiniciar</button>
-                <br>
-                <br>
+        <div>
+            <div style="text-align: center;">
+                <a class="guess" id="opt1" onclick="checkAnswer('#opt1')">
+                </a><br>
+                <a class="guess" id="opt2" onclick="checkAnswer('#opt2')">
+                </a><br>
+                <a class="guess" id="opt3" onclick="checkAnswer('#opt3')">
+                </a><br>
+                <a class="guess" id="opt4" onclick="checkAnswer('#opt4')">
+                </a><br>
             </div>
             <br>
+            <button class="reset" onclick="beginRound()">Reiniciar</button>
+            <br>
+            <br>
+            <h4>Acertos seguidos: <a id="streak"></a> Recorde: <a id="best"></a> Total: <a id="total"></a></h4>
+        </div>
     </div>
+    <footer>
+        <div class="items-menu">
+            <a href="index.html">
+                <img src="img/icons/home-icon.png" alt="">
+                <span>Home</span>
+            </a>
+            <a href="#">
+                <img src="img/icons/anime-list.png" alt="">
+                <span>Anime</span>
+            </a>
+            <a href="#">
+                <img src="img/icons/tcg.png" alt="">
+                <span>TCG</span>
+            </a>
+            <a href="heroGuess.html">
+                <img src="img/icons/dota-2.png" alt="">
+                <span>DotaGuess</span>
+            </a>
+            <a href="pokeDolar.html">
+                <img src="img/icons/pokeball-icon.png" alt="">
+                <span>PokeDolar</span>
+            </a>
+            <a href="sobre.html">
+                <img src="img/icons/about-icon.png" alt="">
+                <span>Sobre</span>
+            </a>
+        </div>
+    </footer>
 </body>
 
 </html>

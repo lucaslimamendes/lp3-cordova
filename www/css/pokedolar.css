@@ -16,22 +16,47 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 * {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
     font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
-    font-size:12px;
-    margin:0px;
-    padding:0px;
-    width:100%;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
 }
 
-.logo {
-    height: 30%;
-    width: 30%;
+p {
+    font-size: medium;
+    text-align: center;
+}
+
+figcaption{
+    text-transform: capitalize;
+    font-style: italic;
+    text-align: center;
+}
+
+figure, h1 {
+    text-align: center;
+}
+
+h1 {
+    padding: 2%;
+    font-size: 40px;
+}
+
+#pkmnImg {
+    width: auto;
+    height: auto;
 }

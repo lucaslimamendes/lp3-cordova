@@ -1,0 +1,51 @@
+h1 {
+    text-align: center;
+    font-size: 40px;
+    padding: 2%;
+}
+
+.container {
+    text-align: center;
+}
+
+.integrante {
+	background-color:#33cc95;
+	border-radius:28px;
+	border:1px solid;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+    width: 250px;
+    margin-top: 20px;
+}
+.integrante:hover {
+	background-color:#5cbf2a;
+}
+.integrante:active {
+	position:relative;
+	top:1px;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
