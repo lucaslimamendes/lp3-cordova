@@ -23,7 +23,24 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+
+    $('body#page-home article form.fake-form a').on('click', function(e){
+        e.preventDefault();
+        $('body#page-home article form.fake-form').submit();
+    });
+
+    $('body#page-home article form.fake-form').on('submit', function(e){
+        e.preventDefault();
+        $('body#page-home article .result').empty();
+        $.ajax( "https://api.nationalize.io/?name="+$('body#page-home article form.fake-form input').val() )
+        .done(function(res) {
+            res.country.forEach(element => {
+                $('body#page-home article .result').append('<div class="res-item"><span class="percentage">'+parseFloat(element.probability).toFixed(2)+'% de chance de ser </span><span class="country">'+element.country_id+'</span></div>')
+            });
+        })
+        .fail(function(err) {
+            console.log('err ', err)
+        });
+    })
 }
