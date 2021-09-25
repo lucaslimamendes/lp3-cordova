@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>Poke Dolar</title>
+    <script>
+        let url = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/brl.json";
+        let pkmn = {
+                "pokemon": function(pkm) {
+                    return "https://pokeapi.co/api/v2/pokemon/" + pkm;
+                }
+            }
+
+        fetch(url)
+            .then(resp => resp.json())
+            .then(result => {
+                document.querySelector("#dolarValue").textContent = "Cotação do Dolar está em USD$" + result.brl.toFixed(2).toString();
+                fetch(pkmn.pokemon(result.brl.toFixed(2).toString().replace(".", "")))
+                    .then(resp => resp.json())
+                    .then(result => {
+                        document.querySelector("#pkmnImg").src = result.sprites.other["official-artwork"].front_default;
+                        document.querySelector("#pkmnInfo").textContent = result.name + " - #" + result.id;
+                    })
+            })
+    </script>
+</head>
+
+<body>
+    
+    <div style="text-align: center; font-size: larger;">Usando cotação do Dólar atual como ID da Pokedex</div>
+    <div id="pokedolar"></div>
+    <div>
+        <p id="dolarValue" style="font-size: medium; text-align: center;"></p>
+        <figure style="text-align: center;">
+            <img alt="Pokemon's Image" id="pkmnImg">
+            <figcaption style="text-transform:capitalize; font-style:italic;" id="pkmnInfo"></figcaption>
+        </figure>
+    </div>
+    </div>
+</body>
+
+</html>
+
+
+http://api.steampowered.com/IEconDOTA2_<ID>/GetHeroes/v1
